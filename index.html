@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epsilon Spark - Creative Arts Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./epsilonsparkimg.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Styles */
+        .gradient-purple-pink {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+        }
+
+        .gradient-purple-pink-text {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-purple {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+        }
+
+        .border-gradient {
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #9333ea 0%, #ec4899 100%) border-box;
+        }
+
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+        }
+
+        .focus-gradient:focus {
+            border-color: #9333ea;
+            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content-full {
+            margin-left: 0 !important;
+        }
+
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+
+        .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 40;
+                height: 100vh;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div id="sidebar"
+        class="sidebar sidebar-gradient w-64 min-h-screen text-white fixed left-0 top-0 z-40 flex flex-col">
+        <!-- Logo -->
+        <div class="p-6 border-b border-white/20">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                    <i data-lucide="sparkles" class="h-6 w-6"></i>
+                </div>
+                <h1 class="text-xl font-bold">Epsilon Spark</h1>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#home" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="home" class="h-5 w-5"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="info" class="h-5 w-5"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#stories" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="book-open" class="h-5 w-5"></i>
+                        <span>Stories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#skits" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="theater" class="h-5 w-5"></i>
+                        <span>Skits</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#shows" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="calendar" class="h-5 w-5"></i>
+                        <span>Shows</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#creators" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="users" class="h-5 w-5"></i>
+                        <span>Creators</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" class="nav-link flex items-center space-x-3 p-3 rounded-lg">
+                        <i data-lucide="mail" class="h-5 w-5"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- User Section -->
+        <div class="p-4 border-t border-white/20">
+            <div id="user-section" class="space-y-2">
+                <!-- Not logged in state -->
+                <div id="not-logged-in" class="space-y-2">
+                    <button id="sign-in-btn"
+                        class="w-full bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition flex items-center justify-center space-x-2">
+                        <i data-lucide="log-in" class="h-4 w-4"></i>
+                        <span>Sign In</span>
+                    </button>
+                    <button id="sign-up-btn"
+                        class="w-full bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition flex items-center justify-center space-x-2">
+                        <i data-lucide="user-plus" class="h-4 w-4"></i>
+                        <span>Create Account</span>
+                    </button>
+                </div>
+                <!-- Logged in state (hidden by default) -->
+                <div id="logged-in" class="hidden space-y-2">
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                                <i data-lucide="user" class="h-4 w-4"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p id="user-name" class="font-medium text-sm"></p>
+                                <p id="user-email" class="text-xs opacity-80"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="sign-out-btn"
+                        class="w-full bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition flex items-center justify-center space-x-2">
+                        <i data-lucide="log-out" class="h-4 w-4"></i>
+                        <span>Sign Out</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content ml-64 min-h-screen">
+        <!-- Mobile Header -->
+        <header class="md:hidden bg-white shadow-sm p-4 flex items-center justify-between">
+            <button id="sidebar-toggle-btn" class="p-2 rounded-lg hover:bg-gray-100">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-purple-pink rounded-lg flex items-center justify-center">
+                    <i data-lucide="sparkles" class="h-5 w-5 text-white"></i>
+                </div>
+                <span class="font-bold gradient-purple-pink-text">Epsilon Spark</span>
+            </div>
+            <div class="w-10"></div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative py-20 px-6 text-center bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl font-bold mb-6 gradient-purple-pink-text">Ignite Your Creative Spark</h2>
+                <p class="text-xl text-gray-700 mb-8">Where stories, skits, and shows come to life. Join our vibrant
+                    community of creators and performers.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="get-started-btn"
+                        class="btn-gradient text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg">
+                        Explore Now
+                    </button>
+                    <button id="learn-more-btn"
+                        class="bg-white text-purple-600 border-2 border-purple-600 px-8 py-3 rounded-full font-semibold text-lg hover:bg-purple-50 transition">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12 px-6 bg-white">
+            <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-6 rounded-lg bg-purple-50 hover:bg-purple-100 transition">
+                    <div class="text-3xl font-bold gradient-purple-pink-text" id="stories-count">0</div>
+                    <div class="text-gray-600 mt-2">Stories</div>
+                </div>
+                <div class="text-center p-6 rounded-lg bg-pink-50 hover:bg-pink-100 transition">
+                    <div class="text-3xl font-bold gradient-purple-pink-text" id="skits-count">0</div>
+                    <div class="text-gray-600 mt-2">Skits</div>
+                </div>
+                <div class="text-center p-6 rounded-lg bg-purple-50 hover:bg-purple-100 transition">
+                    <div class="text-3xl font-bold gradient-purple-pink-text" id="shows-count">0</div>
+                    <div class="text-gray-600 mt-2">Shows</div>
+                </div>
+                <div class="text-center p-6 rounded-lg bg-pink-50 hover:bg-pink-100 transition">
+                    <div class="text-3xl font-bold gradient-purple-pink-text" id="creators-count">0</div>
+                    <div class="text-gray-600 mt-2">Creators</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 px-6 bg-gray-50">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-3xl font-bold mb-6 gradient-purple-pink-text">About Epsilon Spark</h3>
+                <p class="text-lg text-gray-700 mb-8">
+                    Epsilon Spark is a creative platform dedicated to nurturing artistic expression.
+                    We provide a space for writers, performers, and creators to share their stories,
+                    develop their skits, and organize shows. Join us in building a community where
+                    creativity knows no bounds.
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                        <div
+                            class="w-12 h-12 mx-auto mb-4 bg-gradient-purple-pink rounded-full flex items-center justify-center">
+                            <i data-lucide="pen-tool" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Create</h4>
+                        <p class="text-gray-600">Share your stories and scripts with our community</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                        <div
+                            class="w-12 h-12 mx-auto mb-4 bg-gradient-purple-pink rounded-full flex items-center justify-center">
+                            <i data-lucide="users" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Collaborate</h4>
+                        <p class="text-gray-600">Connect with fellow creators and performers</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition">
+                        <div
+                            class="w-12 h-12 mx-auto mb-4 bg-gradient-purple-pink rounded-full flex items-center justify-center">
+                            <i data-lucide="star" class="h-6 w-6 text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2">Showcase</h4>
+                        <p class="text-gray-600">Display your talent to a wider audience</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories" class="py-16 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-3xl font-bold gradient-purple-pink-text">Stories</h3>
+                    <button id="add-story-btn"
+                        class="btn-gradient text-white px-6 py-2 rounded-lg flex items-center space-x-2">
+                        <i data-lucide="plus" class="h-5 w-5"></i>
+                        <span>Add Story</span>
+                    </button>
+                </div>
+                <div id="stories-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Stories will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skits Section -->
+        <section id="skits" class="py-16 px-6 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-3xl font-bold gradient-purple-pink-text">Skits</h3>
+                    <button id="add-skit-btn"
+                        class="btn-gradient text-white px-6 py-2 rounded-lg flex items-center space-x-2">
+                        <i data-lucide="plus" class="h-5 w-5"></i>
+                        <span>Add Skit</span>
+                    </button>
+                </div>
+                <div id="skits-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Skits will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Shows Section -->
+        <section id="shows" class="py-16 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-3xl font-bold gradient-purple-pink-text">Shows</h3>
+                    <button id="add-show-btn"
+                        class="btn-gradient text-white px-6 py-2 rounded-lg flex items-center space-x-2">
+                        <i data-lucide="plus" class="h-5 w-5"></i>
+                        <span>Add Show</span>
+                    </button>
+                </div>
+                <div id="shows-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Shows will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Creators Section -->
+        <section id="creators" class="py-16 px-6 bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl font-bold mb-8 gradient-purple-pink-text">Our Creators</h3>
+                <div id="creators-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Creators will be dynamically added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 px-6 bg-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <h3 class="text-3xl font-bold mb-6 gradient-purple-pink-text">Get In Touch</h3>
+                <p class="text-lg text-gray-700 mb-8">
+                    Have questions or want to collaborate? We'd love to hear from you!
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:contact@epsilonspark.com"
+                        class="flex items-center space-x-2 text-purple-600 hover:text-purple-700">
+                        <i data-lucide="mail" class="h-5 w-5"></i>
+                        <span>contact@epsilonspark.com</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-8 px-6">
+            <div class="max-w-6xl mx-auto text-center">
+                <p>&copy; 2024 Epsilon Spark. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="sign-in-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold gradient-purple-pink-text">Sign In</h3>
+                <button id="close-sign-in-modal" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <form id="sign-in-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" id="sign-in-email"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                    <input type="password" id="sign-in-password"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600">Don't have an account? <a href="#" id="switch-to-sign-up"
+                            class="gradient-purple-pink-text font-semibold">Sign up</a></p>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="btn-gradient text-white px-6 py-2 rounded-lg">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="sign-up-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold gradient-purple-pink-text">Create Account</h3>
+                <button id="close-sign-up-modal" class="text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+            <form id="sign-up-form">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                    <input type="text" id="sign-up-name"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" id="sign-up-email"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                    <input type="password" id="sign-up-password"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
+                    <input type="password" id="sign-up-confirm-password"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <p class="text-sm text-gray-600">Already have an account? <a href="#" id="switch-to-sign-in"
+                            class="gradient-purple-pink-text font-semibold">Sign in</a></p>
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit" class="btn-gradient text-white px-6 py-2 rounded-lg">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div id="story-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold gradient-purple-pink-text">Add New Story</h3>
+                    <button id="close-story-modal" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <form id="story-form">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Title</label>
+                        <input type="text" id="story-title"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Author</label>
+                        <input type="text" id="story-author"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Genre</label>
+                        <select id="story-genre"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                            <option value="">Select Genre</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Story</label>
+                        <textarea id="story-content" rows="8"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-story"
+                            class="mr-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="btn-gradient text-white px-4 py-2 rounded-lg">Save Story</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skit Modal -->
+    <div id="skit-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold gradient-purple-pink-text">Add New Skit</h3>
+                    <button id="close-skit-modal" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <form id="skit-form">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Title</label>
+                        <input type="text" id="skit-title"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Creator</label>
+                        <input type="text" id="skit-creator"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Type</label>
+                        <select id="skit-type"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                            <option value="">Select Type</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Musical">Musical</option>
+                            <option value="Improvisation">Improvisation</option>
+                            <option value="Satire">Satire</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Characters (comma separated)</label>
+                        <input type="text" id="skit-characters"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            placeholder="e.g., Alice, Bob, Charlie" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Script/Description</label>
+                        <textarea id="skit-content" rows="8"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-skit"
+                            class="mr-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="btn-gradient text-white px-4 py-2 rounded-lg">Save Skit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Show Modal -->
+    <div id="show-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-2xl font-bold gradient-purple-pink-text">Add New Show</h3>
+                    <button id="close-show-modal" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <form id="show-form">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Show Title</label>
+                        <input type="text" id="show-title"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Organizer</label>
+                        <input type="text" id="show-organizer"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Date</label>
+                            <input type="date" id="show-date"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                                required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Time</label>
+                            <input type="time" id="show-time"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                                required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Venue</label>
+                        <input type="text" id="show-venue"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Type</label>
+                        <select id="show-type"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required>
+                            <option value="">Select Type</option>
+                            <option value="Theater">Theater</option>
+                            <option value="Concert">Concert</option>
+                            <option value="Stand-up Comedy">Stand-up Comedy</option>
+                            <option value="Dance Performance">Dance Performance</option>
+                            <option value="Poetry Reading">Poetry Reading</option>
+                            <option value="Open Mic">Open Mic</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 font-semibold mb-2">Description</label>
+                        <textarea id="show-description" rows="6"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus-gradient"
+                            required></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="cancel-show"
+                            class="mr-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100">Cancel</button>
+                        <button type="submit" class="btn-gradient text-white px-4 py-2 rounded-lg">Save Show</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modals -->
+    <!-- Story Detail Modal -->
+    <div id="story-detail-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="story-detail-title" class="text-2xl font-bold gradient-purple-pink-text"></h3>
+                    <button id="close-story-detail" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">By <span id="story-detail-author" class="font-semibold"></span></p>
+                    <p class="text-gray-600">Genre: <span id="story-detail-genre" class="font-semibold"></span></p>
+                </div>
+                <div class="prose max-w-none">
+                    <p id="story-detail-content" class="whitespace-pre-wrap"></p>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button id="delete-story"
+                        class="mr-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
+                    <button id="close-story-detail-btn"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skit Detail Modal -->
+    <div id="skit-detail-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="skit-detail-title" class="text-2xl font-bold gradient-purple-pink-text"></h3>
+                    <button id="close-skit-detail" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">By <span id="skit-detail-creator" class="font-semibold"></span></p>
+                    <p class="text-gray-600">Type: <span id="skit-detail-type" class="font-semibold"></span></p>
+                    <p class="text-gray-600">Characters: <span id="skit-detail-characters" class="font-semibold"></span>
+                    </p>
+                </div>
+                <div class="prose max-w-none">
+                    <p id="skit-detail-content" class="whitespace-pre-wrap"></p>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button id="delete-skit"
+                        class="mr-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
+                    <button id="close-skit-detail-btn"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Show Detail Modal -->
+    <div id="show-detail-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="show-detail-title" class="text-2xl font-bold gradient-purple-pink-text"></h3>
+                    <button id="close-show-detail" class="text-gray-500 hover:text-gray-700">
+                        <i data-lucide="x" class="h-6 w-6"></i>
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <p class="text-gray-600">Organized by <span id="show-detail-organizer" class="font-semibold"></span>
+                    </p>
+                    <p class="text-gray-600">Type: <span id="show-detail-type" class="font-semibold"></span></p>
+                    <p class="text-gray-600">Date & Time: <span id="show-detail-datetime" class="font-semibold"></span>
+                    </p>
+                    <p class="text-gray-600">Venue: <span id="show-detail-venue" class="font-semibold"></span></p>
+                </div>
+                <div class="prose max-w-none">
+                    <p id="show-detail-description" class="whitespace-pre-wrap"></p>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button id="delete-show"
+                        class="mr-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
+                    <button id="close-show-detail-btn"
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
+        });
+
+        // Sidebar controls
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const mainContent = document.getElementById('main-content');
+
+        // Toggle sidebar on mobile
+        sidebarToggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('sidebar-closed');
+            sidebarOverlay.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking overlay
+        sidebarOverlay.addEventListener('click', function () {
+            sidebar.classList.add('sidebar-closed');
+            sidebarOverlay.classList.remove('active');
+        });
+
+        // Local Storage Keys
+        const STORAGE_KEYS = {
+            stories: 'epsilon_spark_stories',
+            skits: 'epsilon_spark_skits',
+            shows: 'epsilon_spark_shows',
+            creators: 'epsilon_spark_creators',
+            users: 'epsilon_spark_users',
+            currentUser: 'epsilon_spark_current_user'
+        };
+
+        // Initialize local storage if empty
+        function initializeLocalStorage() {
+            if (!localStorage.getItem(STORAGE_KEYS.stories)) {
+                localStorage.setItem(STORAGE_KEYS.stories, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE_KEYS.skits)) {
+                localStorage.setItem(STORAGE_KEYS.skits, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE_KEYS.shows)) {
+                localStorage.setItem(STORAGE_KEYS.shows, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE_KEYS.creators)) {
+                localStorage.setItem(STORAGE_KEYS.creators, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(STORAGE_KEYS.users)) {
+                localStorage.setItem(STORAGE_KEYS.users, JSON.stringify([]));
+            }
+        }
+
+        // Get data from local storage
+        function getFromLocalStorage(key) {
+            return JSON.parse(localStorage.getItem(key) || '[]');
+        }
+
+        // Save data to local storage
+        function saveToLocalStorage(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        // Update stats
+        function updateStats() {
+            const stories = getFromLocalStorage(STORAGE_KEYS.stories);
+            const skits = getFromLocalStorage(STORAGE_KEYS.skits);
+            const shows = getFromLocalStorage(STORAGE_KEYS.shows);
+            const creators = getFromLocalStorage(STORAGE_KEYS.creators);
+
+            document.getElementById('stories-count').textContent = stories.length;
+            document.getElementById('skits-count').textContent = skits.length;
+            document.getElementById('shows-count').textContent = shows.length;
+            document.getElementById('creators-count').textContent = creators.length;
+        }
+
+        // Generate unique ID
+        function generateId() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        // User Authentication Functions
+        function hashPassword(password) {
+            // Simple hash function (in production, use proper hashing)
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString();
+        }
+
+        function createUser(name, email, password) {
+            const users = getFromLocalStorage(STORAGE_KEYS.users);
+
+            // Check if user already exists
+            if (users.find(user => user.email === email)) {
+                return { success: false, message: 'User with this email already exists' };
+            }
+
+            const newUser = {
+                id: generateId(),
+                name: name,
+                email: email,
+                password: hashPassword(password),
+                createdAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            saveToLocalStorage(STORAGE_KEYS.users, users);
+
+            return { success: true, message: 'Account created successfully' };
+        }
+
+        function authenticateUser(email, password) {
+            const users = getFromLocalStorage(STORAGE_KEYS.users);
+            const user = users.find(u => u.email === email);
+
+            if (!user) {
+                return { success: false, message: 'Invalid email or password' };
+            }
+
+            if (user.password !== hashPassword(password)) {
+                return { success: false, message: 'Invalid email or password' };
+            }
+
+            // Store current user session
+            const userSession = {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            };
+            localStorage.setItem(STORAGE_KEYS.currentUser, JSON.stringify(userSession));
+
+            return { success: true, user: userSession };
+        }
+
+        function getCurrentUser() {
+            const userSession = localStorage.getItem(STORAGE_KEYS.currentUser);
+            return userSession ? JSON.parse(userSession) : null;
+        }
+
+        function signOut() {
+            localStorage.removeItem(STORAGE_KEYS.currentUser);
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const currentUser = getCurrentUser();
+            const notLoggedInDiv = document.getElementById('not-logged-in');
+            const loggedInDiv = document.getElementById('logged-in');
+
+            if (currentUser) {
+                notLoggedInDiv.classList.add('hidden');
+                loggedInDiv.classList.remove('hidden');
+                document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('user-email').textContent = currentUser.email;
+            } else {
+                notLoggedInDiv.classList.remove('hidden');
+                loggedInDiv.classList.add('hidden');
+            }
+        }
+
+        // Render stories
+        function renderStories() {
+            const stories = getFromLocalStorage(STORAGE_KEYS.stories);
+            const container = document.getElementById('stories-container');
+            container.innerHTML = '';
+
+            if (stories.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500 text-lg">No stories yet. Be the first to add one!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            stories.forEach(story => {
+                const storyCard = document.createElement('div');
+                storyCard.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border-gradient';
+                storyCard.innerHTML = `
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold gradient-purple-pink-text mb-2">${story.title}</h4>
+                        <p class="text-gray-600 mb-2">By ${story.author}</p>
+                        <p class="text-gray-500 text-sm mb-4">Genre: ${story.genre}</p>
+                        <p class="text-gray-700 line-clamp-3">${story.content.substring(0, 150)}${story.content.length > 150 ? '...' : ''}</p>
+                        <button class="mt-4 gradient-purple-pink-text font-semibold hover:text-gradient-purple flex items-center" data-id="${story.id}">
+                            Read More <i data-lucide="arrow-right" class="ml-1 h-4 w-4"></i>
+                        </button>
+                    </div>
+                `;
+
+                const readMoreBtn = storyCard.querySelector('button');
+                readMoreBtn.addEventListener('click', () => showStoryDetail(story.id));
+
+                container.appendChild(storyCard);
+            });
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+        }
+
+        // Render skits
+        function renderSkits() {
+            const skits = getFromLocalStorage(STORAGE_KEYS.skits);
+            const container = document.getElementById('skits-container');
+            container.innerHTML = '';
+
+            if (skits.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500 text-lg">No skits yet. Be the first to add one!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            skits.forEach(skit => {
+                const skitCard = document.createElement('div');
+                skitCard.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border-gradient';
+                skitCard.innerHTML = `
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold gradient-purple-pink-text mb-2">${skit.title}</h4>
+                        <p class="text-gray-600 mb-2">By ${skit.creator}</p>
+                        <p class="text-gray-500 text-sm mb-2">Type: ${skit.type}</p>
+                        <p class="text-gray-500 text-sm mb-4">Characters: ${skit.characters.join(', ')}</p>
+                        <p class="text-gray-700 line-clamp-3">${skit.content.substring(0, 150)}${skit.content.length > 150 ? '...' : ''}</p>
+                        <button class="mt-4 gradient-purple-pink-text font-semibold hover:text-gradient-purple flex items-center" data-id="${skit.id}">
+                            Read More <i data-lucide="arrow-right" class="ml-1 h-4 w-4"></i>
+                        </button>
+                    </div>
+                `;
+
+                const readMoreBtn = skitCard.querySelector('button');
+                readMoreBtn.addEventListener('click', () => showSkitDetail(skit.id));
+
+                container.appendChild(skitCard);
+            });
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+        }
+
+        // Render shows
+        function renderShows() {
+            const shows = getFromLocalStorage(STORAGE_KEYS.shows);
+            const container = document.getElementById('shows-container');
+            container.innerHTML = '';
+
+            if (shows.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500 text-lg">No shows yet. Be the first to add one!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            shows.forEach(show => {
+                const showCard = document.createElement('div');
+                showCard.className = 'bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer border-gradient';
+                showCard.innerHTML = `
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold gradient-purple-pink-text mb-2">${show.title}</h4>
+                        <p class="text-gray-600 mb-2">Organized by ${show.organizer}</p>
+                        <p class="text-gray-500 text-sm mb-2">Type: ${show.type}</p>
+                        <p class="text-gray-500 text-sm mb-2">Date: ${formatDate(show.date)}</p>
+                        <p class="text-gray-500 text-sm mb-2">Time: ${show.time}</p>
+                        <p class="text-gray-500 text-sm mb-4">Venue: ${show.venue}</p>
+                        <p class="text-gray-700 line-clamp-3">${show.description.substring(0, 150)}${show.description.length > 150 ? '...' : ''}</p>
+                        <button class="mt-4 gradient-purple-pink-text font-semibold hover:text-gradient-purple flex items-center" data-id="${show.id}">
+                            View Details <i data-lucide="arrow-right" class="ml-1 h-4 w-4"></i>
+                        </button>
+                    </div>
+                `;
+
+                const viewDetailsBtn = showCard.querySelector('button');
+                viewDetailsBtn.addEventListener('click', () => showShowDetail(show.id));
+
+                container.appendChild(showCard);
+            });
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+        }
+
+        // Render creators
+        function renderCreators() {
+            const creators = getFromLocalStorage(STORAGE_KEYS.creators);
+            const container = document.getElementById('creators-container');
+            container.innerHTML = '';
+
+            if (creators.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8">
+                        <p class="text-gray-500 text-lg">No creators yet.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            creators.forEach(creator => {
+                const creatorCard = document.createElement('div');
+                creatorCard.className = 'bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-all border-gradient';
+                creatorCard.innerHTML = `
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-purple-pink rounded-full flex items-center justify-center">
+                        <i data-lucide="user" class="h-8 w-8 text-white"></i>
+                    </div>
+                    <h4 class="font-semibold gradient-purple-pink-text">${creator}</h4>
+                `;
+                container.appendChild(creatorCard);
+            });
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+        }
+
+        // Show story detail
+        function showStoryDetail(storyId) {
+            const stories = getFromLocalStorage(STORAGE_KEYS.stories);
+            const story = stories.find(s => s.id === storyId);
+
+            if (!story) return;
+
+            document.getElementById('story-detail-title').textContent = story.title;
+            document.getElementById('story-detail-author').textContent = story.author;
+            document.getElementById('story-detail-genre').textContent = story.genre;
+            document.getElementById('story-detail-content').textContent = story.content;
+
+            document.getElementById('story-detail-modal').classList.remove('hidden');
+
+            // Set up delete button
+            const deleteBtn = document.getElementById('delete-story');
+            deleteBtn.onclick = function () {
+                if (confirm('Are you sure you want to delete this story?')) {
+                    const updatedStories = stories.filter(s => s.id !== storyId);
+                    saveToLocalStorage(STORAGE_KEYS.stories, updatedStories);
+                    renderStories();
+                    updateStats();
+                    document.getElementById('story-detail-modal').classList.add('hidden');
+                }
+            };
+        }
+
+        // Show skit detail
+        function showSkitDetail(skitId) {
+            const skits = getFromLocalStorage(STORAGE_KEYS.skits);
+            const skit = skits.find(s => s.id === skitId);
+
+            if (!skit) return;
+
+            document.getElementById('skit-detail-title').textContent = skit.title;
+            document.getElementById('skit-detail-creator').textContent = skit.creator;
+            document.getElementById('skit-detail-type').textContent = skit.type;
+            document.getElementById('skit-detail-characters').textContent = skit.characters.join(', ');
+            document.getElementById('skit-detail-content').textContent = skit.content;
+
+            document.getElementById('skit-detail-modal').classList.remove('hidden');
+
+            // Set up delete button
+            const deleteBtn = document.getElementById('delete-skit');
+            deleteBtn.onclick = function () {
+                if (confirm('Are you sure you want to delete this skit?')) {
+                    const updatedSkits = skits.filter(s => s.id !== skitId);
+                    saveToLocalStorage(STORAGE_KEYS.skits, updatedSkits);
+                    renderSkits();
+                    updateStats();
+                    document.getElementById('skit-detail-modal').classList.add('hidden');
+                }
+            };
+        }
+
+        // Show show detail
+        function showShowDetail(showId) {
+            const shows = getFromLocalStorage(STORAGE_KEYS.shows);
+            const show = shows.find(s => s.id === showId);
+
+            if (!show) return;
+
+            document.getElementById('show-detail-title').textContent = show.title;
+            document.getElementById('show-detail-organizer').textContent = show.organizer;
+            document.getElementById('show-detail-type').textContent = show.type;
+            document.getElementById('show-detail-datetime').textContent = `${formatDate(show.date)} at ${show.time}`;
+            document.getElementById('show-detail-venue').textContent = show.venue;
+            document.getElementById('show-detail-description').textContent = show.description;
+
+            document.getElementById('show-detail-modal').classList.remove('hidden');
+
+            // Set up delete button
+            const deleteBtn = document.getElementById('delete-show');
+            deleteBtn.onclick = function () {
+                if (confirm('Are you sure you want to delete this show?')) {
+                    const updatedShows = shows.filter(s => s.id !== showId);
+                    saveToLocalStorage(STORAGE_KEYS.shows, updatedShows);
+                    renderShows();
+                    updateStats();
+                    document.getElementById('show-detail-modal').classList.add('hidden');
+                }
+            };
+        }
+
+        // Add creator to local storage if not exists
+        function addCreatorIfNotExists(name) {
+            const creators = getFromLocalStorage(STORAGE_KEYS.creators);
+            if (!creators.includes(name)) {
+                creators.push(name);
+                saveToLocalStorage(STORAGE_KEYS.creators, creators);
+            }
+        }
+
+        // Modal controls
+        const storyModal = document.getElementById('story-modal');
+        const skitModal = document.getElementById('skit-modal');
+        const showModal = document.getElementById('show-modal');
+        const storyDetailModal = document.getElementById('story-detail-modal');
+        const skitDetailModal = document.getElementById('skit-detail-modal');
+        const showDetailModal = document.getElementById('show-detail-modal');
+        const signInModal = document.getElementById('sign-in-modal');
+        const signUpModal = document.getElementById('sign-up-modal');
+
+        // Open modals
+        document.getElementById('add-story-btn').addEventListener('click', () => {
+            storyModal.classList.remove('hidden');
+        });
+
+        document.getElementById('add-skit-btn').addEventListener('click', () => {
+            skitModal.classList.remove('hidden');
+        });
+
+        document.getElementById('add-show-btn').addEventListener('click', () => {
+            showModal.classList.remove('hidden');
+        });
+
+        // Authentication modals
+        document.getElementById('sign-in-btn').addEventListener('click', () => {
+            signInModal.classList.remove('hidden');
+        });
+
+        document.getElementById('sign-up-btn').addEventListener('click', () => {
+            signUpModal.classList.remove('hidden');
+        });
+
+        // Close modals
+        document.getElementById('close-story-modal').addEventListener('click', () => {
+            storyModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-skit-modal').addEventListener('click', () => {
+            skitModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-show-modal').addEventListener('click', () => {
+            showModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-sign-in-modal').addEventListener('click', () => {
+            signInModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-sign-up-modal').addEventListener('click', () => {
+            signUpModal.classList.add('hidden');
+        });
+
+        // Switch between sign in and sign up
+        document.getElementById('switch-to-sign-up').addEventListener('click', (e) => {
+            e.preventDefault();
+            signInModal.classList.add('hidden');
+            signUpModal.classList.remove('hidden');
+        });
+
+        document.getElementById('switch-to-sign-in').addEventListener('click', (e) => {
+            e.preventDefault();
+            signUpModal.classList.add('hidden');
+            signInModal.classList.remove('hidden');
+        });
+
+        // Sign out
+        document.getElementById('sign-out-btn').addEventListener('click', () => {
+            signOut();
+        });
+
+        // Sign in form submission
+        document.getElementById('sign-in-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('sign-in-email').value;
+            const password = document.getElementById('sign-in-password').value;
+
+            const result = authenticateUser(email, password);
+
+            if (result.success) {
+                signInModal.classList.add('hidden');
+                updateUserUI();
+                this.reset();
+                alert('Signed in successfully!');
+            } else {
+                alert(result.message);
+            }
+        });
+
+        // Sign up form submission
+        document.getElementById('sign-up-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('sign-up-name').value;
+            const email = document.getElementById('sign-up-email').value;
+            const password = document.getElementById('sign-up-password').value;
+            const confirmPassword = document.getElementById('sign-up-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const result = createUser(name, email, password);
+
+            if (result.success) {
+                signUpModal.classList.add('hidden');
+                this.reset();
+                alert(result.message);
+            } else {
+                alert(result.message);
+            }
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+                // Add active class to clicked link
+                this.classList.add('active');
+
+                // Get target section
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    // Close sidebar on mobile after navigation
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('sidebar-closed');
+                        sidebarOverlay.classList.remove('active');
+                    }
+
+                    // Smooth scroll to section
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Detail modal close buttons
+        document.getElementById('close-story-detail').addEventListener('click', () => {
+            storyDetailModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-skit-detail').addEventListener('click', () => {
+            skitDetailModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-show-detail').addEventListener('click', () => {
+            showDetailModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-story-detail-btn').addEventListener('click', () => {
+            storyDetailModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-skit-detail-btn').addEventListener('click', () => {
+            skitDetailModal.classList.add('hidden');
+        });
+
+        document.getElementById('close-show-detail-btn').addEventListener('click', () => {
+            showDetailModal.classList.add('hidden');
+        });
+
+        // Cancel buttons
+        document.getElementById('cancel-story').addEventListener('click', () => {
+            storyModal.classList.add('hidden');
+        });
+
+        document.getElementById('cancel-skit').addEventListener('click', () => {
+            skitModal.classList.add('hidden');
+        });
+
+        document.getElementById('cancel-show').addEventListener('click', () => {
+            showModal.classList.add('hidden');
+        });
+
+        // Form submissions
+        document.getElementById('story-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const stories = getFromLocalStorage(STORAGE_KEYS.stories);
+            const newStory = {
+                id: generateId(),
+                title: document.getElementById('story-title').value,
+                author: document.getElementById('story-author').value,
+                genre: document.getElementById('story-genre').value,
+                content: document.getElementById('story-content').value,
+                createdAt: new Date().toISOString()
+            };
+
+            stories.push(newStory);
+            saveToLocalStorage(STORAGE_KEYS.stories, stories);
+            addCreatorIfNotExists(newStory.author);
+
+            renderStories();
+            renderCreators();
+            updateStats();
+            storyModal.classList.add('hidden');
+            this.reset();
+        });
+
+        document.getElementById('skit-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const skits = getFromLocalStorage(STORAGE_KEYS.skits);
+            const newSkit = {
+                id: generateId(),
+                title: document.getElementById('skit-title').value,
+                creator: document.getElementById('skit-creator').value,
+                type: document.getElementById('skit-type').value,
+                characters: document.getElementById('skit-characters').value.split(',').map(c => c.trim()),
+                content: document.getElementById('skit-content').value,
+                createdAt: new Date().toISOString()
+            };
+
+            skits.push(newSkit);
+            saveToLocalStorage(STORAGE_KEYS.skits, skits);
+            addCreatorIfNotExists(newSkit.creator);
+
+            renderSkits();
+            renderCreators();
+            updateStats();
+            skitModal.classList.add('hidden');
+            this.reset();
+        });
+
+        document.getElementById('show-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const shows = getFromLocalStorage(STORAGE_KEYS.shows);
+            const newShow = {
+                id: generateId(),
+                title: document.getElementById('show-title').value,
+                organizer: document.getElementById('show-organizer').value,
+                date: document.getElementById('show-date').value,
+                time: document.getElementById('show-time').value,
+                venue: document.getElementById('show-venue').value,
+                type: document.getElementById('show-type').value,
+                description: document.getElementById('show-description').value,
+                createdAt: new Date().toISOString()
+            };
+
+            shows.push(newShow);
+            saveToLocalStorage(STORAGE_KEYS.shows, shows);
+            addCreatorIfNotExists(newShow.organizer);
+
+            renderShows();
+            renderCreators();
+            updateStats();
+            showModal.classList.add('hidden');
+            this.reset();
+        });
+
+        // Get Started button
+        document.getElementById('get-started-btn').addEventListener('click', function () {
+            document.getElementById('stories').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Learn More button
+        document.getElementById('learn-more-btn').addEventListener('click', function () {
+            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Handle window resize for sidebar
+        function handleResize() {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('sidebar-closed');
+                sidebarOverlay.classList.remove('active');
+                mainContent.classList.remove('main-content-full');
+            } else {
+                mainContent.classList.add('main-content-full');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call once on load
+
+        // Initialize the app
+        initializeLocalStorage();
+        renderStories();
+        renderSkits();
+        renderShows();
+        renderCreators();
+        updateStats();
+        updateUserUI();
+    </script>
+</body>
+
+</html>
