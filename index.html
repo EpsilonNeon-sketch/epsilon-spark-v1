@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epsilon Spark - ignite Your Creativity</title>
+    <link rel="icon" href="epsilonsparkimg.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .gradient-brand {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: #9333ea;
+        }
+
+        .hero-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .custom-shadow {
+            box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.5);
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden">
+    <div class="hero-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center glass-card border-none bg-opacity-80">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 gradient-brand rounded-lg flex items-center justify-center custom-shadow">
+                <i data-lucide="sparkles" class="text-white"></i>
+            </div>
+            <span class="text-xl font-bold tracking-tight">EPSILON <span class="text-gradient">SPARK</span></span>
+        </div>
+
+        <div class="hidden md:flex gap-8 font-medium">
+            <a href="#about" class="hover:text-purple-400 transition-colors">About</a>
+            <a href="#features" class="hover:text-purple-400 transition-colors">Features</a>
+            <a href="#admins" class="hover:text-purple-400 transition-colors">Team</a>
+        </div>
+        <a href="./site.html">
+            <button
+                class="gradient-brand px-6 py-2 rounded-full font-semibold hover:opacity-90 transition-all active:scale-95 shadow-lg">
+                Launch App
+            </button>
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            The Hub for <span class="text-gradient">Digital Artists</span> and Creators.
+        </h1>
+        <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto">
+            Ignite your creative potential with Epsilon Spark. A premium space for stories, skits, and shows—built
+            within the Epsilon ecosystem.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+                class="gradient-brand px-8 py-4 rounded-xl font-bold text-lg custom-shadow flex items-center justify-center gap-2">
+                Get Started <i data-lucide="arrow-right"></i>
+            </button>
+            <button
+                class="bg-slate-800 border border-slate-700 px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-700 transition-colors">
+                View Gallery
+            </button>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="py-12 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="text-3xl font-bold text-gradient mb-1">2+</div>
+                <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Stories</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="text-3xl font-bold text-gradient mb-1">8+</div>
+                <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Skits</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="text-3xl font-bold text-gradient mb-1">12+</div>
+                <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Shows</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <div class="text-3xl font-bold text-gradient mb-1">9</div>
+                <div class="text-sm text-slate-500 uppercase tracking-widest font-bold">Admins</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Everything you need to <span
+                class="text-purple-400">create</span>.</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="book-open" class="text-purple-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Immersive Stories</h3>
+                <p class="text-slate-400">Share your narratives with a community that appreciates the depth of digital
+                    storytelling.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="video" class="text-pink-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Skit Master</h3>
+                <p class="text-slate-400">Upload and showcase short-form video content that hits different. Built for
+                    the modern creator.</p>
+            </div>
+            <div class="glass-card p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center mb-6">
+                    <i data-lucide="database" class="text-indigo-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Supabase Powered</h3>
+                <p class="text-slate-400">Your data is safe with our robust backend integration, ensuring seamless
+                    uploads and management.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Team -->
+    <section id="admins" class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The Epsilon <span class="text-gradient">Council</span>
+                </h2>
+                <p class="text-slate-400">Meet the masterminds behind the ecosystem.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Admins based on user profile -->
+                <div class="glass-card p-4 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i data-lucide="crown" class="text-yellow-400"></i>
+                    </div>
+                    <p class="font-bold">Warren</p>
+                    <p class="text-xs text-purple-400 uppercase">Founder</p>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i data-lucide="user" class="text-slate-400"></i>
+                    </div>
+                    <p class="font-bold">Glenn</p>
+                    <p class="text-xs text-slate-500">Admin</p>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i data-lucide="user" class="text-slate-400"></i>
+                    </div>
+                    <p class="font-bold">Jaydon</p>
+                    <p class="text-xs text-slate-500">Admin</p>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i data-lucide="user" class="text-slate-400"></i>
+                    </div>
+                    <p class="font-bold">Dylan</p>
+                    <p class="text-xs text-slate-500">Admin</p>
+                </div>
+                <div class="glass-card p-4 rounded-2xl text-center">
+                    <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i data-lucide="user" class="text-slate-400"></i>
+                    </div>
+                    <p class="font-bold">Victor</p>
+                    <p class="text-xs text-slate-500">Admin</p>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-slate-500 text-sm">
+                And the rest of the crew: Ethan, Richard, Philip, & Franci.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-slate-800 mt-20">
+        <div class="max-w-6xl mx-auto flex flex-col md:row justify-between items-center gap-8">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 gradient-brand rounded flex items-center justify-center">
+                    <i data-lucide="sparkles" class="text-white w-4 h-4"></i>
+                </div>
+                <span class="font-bold">EPSILON SPARK</span>
+            </div>
+            <p class="text-slate-500 text-sm">© 2026 Epsilon Tech Ecosystem. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="github"></i></a>
+                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="twitter"></i></a>
+                <a href="#" class="text-slate-500 hover:text-white transition-colors"><i data-lucide="globe"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Reveal animations on scroll
+        const cards = document.querySelectorAll('.glass-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>
